@@ -39,20 +39,23 @@ def _run():
 
     while True:
         # // TODO: Speech recognition
-        print("\n✅ > Speak Now\n")
-        _msg = recg_speech()
-        print(f"💬 > {_msg}")
+        try:
+            print("\n✅ > Speak Now\n")
+            _msg = recg_speech()
+            print(f"💬 > {_msg}")
 
-        resp = re.sub(
-            r"<([a-z]+)(?![^>]*\/>)[^>]*> *[a-zA-Z0-9]+ *<(\/[a-z]+)>",
-            "",
-            get_resp(_msg),
-        )
+            resp = re.sub(
+                r"<([a-z]+)(?![^>]*\/>)[^>]*> *[a-zA-Z0-9]+ *<(\/[a-z]+)>",
+                "",
+                get_resp(_msg),
+            )
 
-        print(f"🤖 > {resp}")
+            print(f"🤖 > {resp}")
 
-        engine.say(resp)
-        engine.runAndWait()
+            engine.say(resp)
+            engine.runAndWait()
+        except KeyboardInterrupt:
+            quit(0)
 
 
 if __name__ == "__main__":
