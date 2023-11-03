@@ -45,10 +45,10 @@ Before you can use the Speech-ChatBot, you need to have the following prerequisi
 
 ### Configuration
 
-Before you can use the Speech-ChatBot, you need to configure it with your brainshop.ai API key and Brain ID. Open the `.env` file in a text editor and replace `YOUR_API_KEY_HERE` and `YOUR_BRAIN_ID_HERE` with your actual API key and Brain ID:
+**1.** Before you can use the Speech-ChatBot, you need to configure it with your brainshop.ai API key and Brain ID. Create (in `./`) and open the `secret.env` file in a text editor and replace `YOUR_API_KEY_HERE` and `YOUR_BRAIN_ID_HERE` with your actual API key and Brain ID:
 
 ```bash
-# .env
+# secret.env
 
 # Replace "YOUR_API_KEY_HERE" with your brainshop.ai API key
 BS_KEY="YOUR_API_KEY_HERE"
@@ -56,16 +56,18 @@ BS_KEY="YOUR_API_KEY_HERE"
 BS_ID="YOUR_BRAIN_ID_HERE"
 
 ```
+**2.** Train your Brain at https://brainshop.ai including attributes and other models.
+
 
 ### Running the ChatBot
 
 To start the Speech-ChatBot, simply run the following command:
 
 ```bash
-python3 .
+python . # Or python __main__.py
 ```
 
-The chatbot will start and display a prompt for you to enter your messages. It will send your messages to the brainshop.ai API and display the chatbot's responses.
+The chatbot will start and display a prompt for you to speak through your microphone. It will send your messages to the brainshop.ai API and display the chatbot's responses.
 
 Feel free to have a natural conversation with the chatbot. You can use it for various purposes, including answering questions, providing information, or just engaging in casual conversation.
 

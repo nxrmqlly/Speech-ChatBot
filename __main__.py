@@ -3,13 +3,13 @@ import json
 import re
 import pyttsx3
 
-from log import generate_uuid, _log_msg
-from speech import recg_speech
-from os import getenv
+from extensions.log import generate_uuid, log_msg, setup_logfile
+from extensions.speech import recg_speech
+from os import getenv, system
 from dotenv import load_dotenv
 from typing import Dict
 
-load_dotenv("./.env")
+load_dotenv("./secret.env")
 
 
 def get_resp(msg: str) -> Dict | None:
@@ -27,12 +27,13 @@ def get_resp(msg: str) -> Dict | None:
 
     _resp = json.loads(raw.content)["cnt"]
 
-    _log_msg(uuid, msg, _resp)
+    log_msg(uuid, msg, _resp)
 
     return _resp
 
 
 def _run():
+    # * Init TTS
     engine = pyttsx3.init()
     engine.setProperty("rate", 150)
     engine.setProperty("voice", engine.getProperty("voices")[0])
@@ -41,6 +42,7 @@ def _run():
         # // TODO: Speech recognition
         try:
             print("\n✅ > Speak Now\n")
+
             _msg = recg_speech()
             print(f"💬 > {_msg}")
 
@@ -52,11 +54,15 @@ def _run():
 
             print(f"🤖 > {resp}")
 
+            # * TTS
             engine.say(resp)
             engine.runAndWait()
+
         except KeyboardInterrupt:
             quit(0)
 
 
 if __name__ == "__main__":
+    system("cls")
+    setup_logfile()
     _run()

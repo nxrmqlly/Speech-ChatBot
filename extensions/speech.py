@@ -15,7 +15,6 @@ def recg_speech() -> str:
                     aud, with_confidence=True, language="en-IN"
                 )
 
-
         except speech_recognition.exceptions.UnknownValueError:
             recg = speech_recognition.Recognizer()
             print("❌ > Please Say that again!\n")
