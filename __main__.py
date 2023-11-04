@@ -2,10 +2,10 @@ import requests
 import json
 import re
 import pyttsx3
+import os
 
 from extensions.log import generate_uuid, log_msg, setup_logfile
 from extensions.speech import recg_speech
-from os import getenv, system
 from dotenv import load_dotenv
 from typing import Dict
 
@@ -18,8 +18,8 @@ def get_resp(msg: str) -> Dict | None:
     raw = requests.get(
         "http://api.brainshop.ai/get/",
         {
-            "bid": getenv("BS_ID"),
-            "key": getenv("BS_KEY"),
+            "bid": os.getenv("BS_ID"),
+            "key": os.getenv("BS_KEY"),
             "uid": uuid,
             "msg": msg,
         },
@@ -41,8 +41,6 @@ def _run():
     while True:
         # // TODO: Speech recognition
         try:
-            print("\n✅ > Speak Now\n")
-
             _msg = recg_speech()
             print(f"💬 > {_msg}")
 
@@ -63,6 +61,6 @@ def _run():
 
 
 if __name__ == "__main__":
-    system("cls")
+    os.system('cls' if os.name == 'nt' else 'clear')
     setup_logfile()
     _run()

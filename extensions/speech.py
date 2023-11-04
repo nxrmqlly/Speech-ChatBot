@@ -1,16 +1,19 @@
-import pyttsx3
 import speech_recognition
 
 
 def recg_speech() -> str:
-    recg = speech_recognition.Recognizer()
+
+    recg = speech_recognition.Recognizer() #init Recognizer
+    print("\n✅ > Speak Now\n")
+
     _res = None
     while not _res:
         try:
             with speech_recognition.Microphone() as mic:
-                recg.adjust_for_ambient_noise(mic, 0.6)
+                recg.adjust_for_ambient_noise(mic, 0.6) #Ambient noise
 
                 aud = recg.listen(mic)
+
                 _res = recg.recognize_google(
                     aud, with_confidence=True, language="en-IN"
                 )
